@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+    <title>Stella a Cinque Punte</title>
+    <style>
+        body {
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="stellaCanvas" width="500" height="500"></canvas>
+
+    <script>
+        function disegnaStella(context, x, y, raggioEsterno, raggioInterno, punte) {
+            const angolo = Math.PI / punte;
+            context.beginPath();
+            for (let i = 0; i < 2 * punte; i++) {
+                const r = (i % 2 === 0) ? raggioEsterno : raggioInterno;
+                const px = x + r * Math.cos(i * angolo - Math.PI / 2);
+                const py = y + r * Math.sin(i * angolo - Math.PI / 2);
+                if (i === 0) {
+                    context.moveTo(px, py);
+                } else {
+                    context.lineTo(px, py);
+                }
+            }
+            context.closePath();
+            context.fillStyle = "gold";
+            context.fill();
+            context.strokeStyle = "black";
+            context.stroke();
+        }
+
+        const canvas = document.getElementById("stellaCanvas");
+        const context = canvas.getContext("2d");
+
+        disegnaStella(context, canvas.width / 2, canvas.height / 2, 100, 50, 5);
+    </script>
+</body>
+</html>

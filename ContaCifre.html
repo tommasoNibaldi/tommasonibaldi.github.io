@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contatore di Cifre</title>
+    <style>
+        p {
+            color: black;
+            font-size: 16px;
+            font-family: 'Courier New', Courier;
+        }
+        h1 {
+            text-align: center;
+            padding-top: 12px;
+            color: greenyellow;
+            padding-bottom: 13px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contatore di Cifre</h1>
+    <p>Inserisci il numero che desideri:
+        <input type="text" id="demo">
+    </p>
+    <p>
+        <input type="button" value="Cliccami" onclick="operazione()">
+    </p>
+    <p id="valAbs"></p>
+    <p id="zero"></p>
+    <p id="cifre"></p>
+    <script>
+        function operazione() {
+            let numero = parseInt(document.getElementById("demo").value, 10);
+            if (numero < 0) {
+                document.getElementById("valAbs").innerHTML = "il numero scelto è negativo, ne faremo il valore assoluto";
+                numero *= -1;
+            }
+            if (numero == 0) {
+                document.getElementById("zero").innerHTML = "il numero scelto è 0, diventerà 1";
+                numero++; 
+            }
+            console.log(numero);
+            let numeroInStringa = numero.toString();
+            let contatoreCifre = numeroInStringa.length; 
+            document.getElementById("cifre").innerHTML = "il numero di cifre del numero "+numero+" è: "+contatoreCifre; 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1 {
+            text-align: center;
+            color: rgb(225, 255, 0);
+            font-size: 26px;
+            padding-bottom: 17px;
+            padding-top: 17px;
+        } 
+        p {
+            color: black;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow';
+            padding-left: 1%;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: rgb(0, 0, 0);
+        }
+    </style>
+    <script>
+        function stampa() {
+            var a = document.getElementById("demo").value;
+            document.getElementById("dest").innerHTML = a;
+            var b = document.getElementById("demo1").value;
+            document.getElementById("dest1").innerHTML = b;
+            var c = document.getElementById("demo2").value;
+            document.getElementById("dest2").innerHTML = c;
+            var d = document.getElementById("demo3").value;
+            document.getElementById("dest3").innerHTML = d;
+            var e = document.getElementById("demo4").value;
+            document.getElementById("dest4").innerHTML = e;
+            var f = document.getElementById("demo5").value;
+            document.getElementById("dest5").innerHTML = f;
+        }
+    </script>
+</head>
+<body>
+    <h1>Primo esercizio su JavaScript</h1>
+    
+    <p>Cognome: <input type="text" id="demo"></p>
+    <p>Nome: <input type="text" id="demo1"></p>
+    <p>Età: <input type="text" id="demo2"></p>
+    <p>Indirizzo: <input type="text" id="demo3"></p>
+    <p>Città: <input type="text" id="demo4"></p>
+    <p>CAP: <input type="text" id="demo5"></p>
+    <p><input type="button" value="Cliccami" onclick="stampa()"></p>
+    <h2>Informazioni Inserite:</h2>
+    <p>Cognome: <span id="dest"></span></p>
+    <p>Nome: <span id="dest1"></span></p>
+    <p>Età: <span id="dest2"></span></p>
+    <p>Indirizzo: <span id="dest3"></span></p>
+    <p>Città: <span id="dest4"></span></p>
+    <p>Cap: <span id="dest5"></span></p>
+</body>
+</html>

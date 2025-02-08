@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV to HTML Table and Chart</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSV to HTML Table and Chart</h1>
+    <input type="file" id="csvFileInput" accept=".csv" />
+    <div id="tableContainer"></div>
+    <canvas id="chartCanvas" width="800" height="400"></canvas>
+
+    <script>
+        document.getElementById('csvFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const text = e.target.result;
+                    const rows = text.split('\n').filter(row => row.trim() !== '');
+                    const table = document.createElement('table');
+
+                    const data = { years: [], landings: [] };
+
+                    rows.forEach((row, index) => {
+                        const cols = row.split(',');
+                        const tr = document.createElement('tr');
+
+                        cols.forEach(col => {
+                            const cell = index === 0 ? document.createElement('th') : document.createElement('td');
+                            cell.textContent = col.trim();
+                            tr.appendChild(cell);
+                        });
+
+                        table.appendChild(tr);
+
+                        if (index > 0) {
+                            const year = parseInt(cols[0].trim(), 10);
+                            const landing = parseFloat(cols[1].trim());
+
+                            if (!isNaN(year) && !isNaN(landing)) {
+                                data.years.push(year);
+                                data.landings.push(landing);
+                            }
+                        }
+                    });
+
+                    const tableContainer = document.getElementById('tableContainer');
+                    tableContainer.innerHTML = '';
+                    tableContainer.appendChild(table);
+
+                    drawChart(data);
+                };
+
+                reader.readAsText(file);
+            }
+        });
+
+        function drawChart(data) {
+            const canvas = document.getElementById('chartCanvas');
+            const ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const padding = 50;
+            const chartWidth = canvas.width - padding * 2;
+            const chartHeight = canvas.height - padding * 2;
+
+            const maxLanding = Math.max(...data.landings);
+            const minYear = Math.min(...data.years);
+            const maxYear = Math.max(...data.years);
+
+            const xScale = chartWidth / (maxYear - minYear);
+            const yScale = chartHeight / maxLanding;
+
+            ctx.beginPath();
+            ctx.moveTo(padding, padding);
+            ctx.lineTo(padding, canvas.height - padding);
+            ctx.lineTo(canvas.width - padding, canvas.height - padding);
+            ctx.stroke();
+
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+
+            for (let i = 0; i <= maxLanding; i += Math.ceil(maxLanding / 10)) {
+                const y = canvas.height - padding - i * yScale;
+                ctx.fillText(i, padding - 10, y);
+                ctx.beginPath();
+                ctx.moveTo(padding - 5, y);
+                ctx.lineTo(padding, y);
+                ctx.stroke();
+            }
+
+            data.years.forEach((year, index) => {
+                const x = padding + (year - minYear) * xScale;
+                ctx.fillText(year, x, canvas.height - padding + 15);
+                ctx.beginPath();
+                ctx.moveTo(x, canvas.height - padding);
+                ctx.lineTo(x, canvas.height - padding + 5);
+                ctx.stroke();
+            });
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2;
+
+            data.years.forEach((year, index) => {
+                ctx.moveTo(x, canvas.height - padding);
+                ctx.lineTo(x, canvas.height - padding + 5);
+                ctx.stroke();
+            });
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2;
+
+            data.years.forEach((year, index) => {
+                const x = padding + (year - minYear) * xScale;
+                const y = canvas.height - padding - data.landings[index] * yScale;
+
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+
+            ctx.stroke();
+
+            ctx.fillStyle = 'red';
+            data.years.forEach((year, index) => {
+                const x = padding + (year - minYear) * xScale;
+                const y = canvas.height - padding - data.landings[index] * yScale;
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+    </script>
+</body>
+</html>

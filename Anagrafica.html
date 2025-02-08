@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1{
+            text-align: center;
+            color: rgb(0, 21, 255);
+            font-size: 26px;
+            padding-bottom: 17px;
+        } 
+        p{
+            color: rgb(0, 0, 0);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow';
+            padding-left: 1%;
+        }
+        body{
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        table {
+            width: 60%;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid black;
+            font-size: 24px;
+            color: white;
+        }
+    </style>
+<script>
+    function stampa() {
+    var a=document.getElementById("demo").value
+    document.getElementById("dest").innerHTML=a
+    var b=document.getElementById("demo1").value
+    document.getElementById("dest1").innerHTML=b
+    var c=document.getElementById("demo2").value
+    document.getElementById("dest2").innerHTML=c
+    }
+</script>
+</head>
+<body>
+    <h1>Esercizio su JavaScript</h1>
+    <p> Nome:
+    <input type="text" id="demo">
+<input type="button" value="Cliccami" onclick="stampa()">
+    </p>
+    <p> Cognome:
+        <input type="text" id="demo1">
+<input type="button" value="Cliccami" onclick="stampa()">
+    </p>
+    <p> Indirizzo:
+        <input type="text" id="demo2">
+<input type="button" value="Cliccami" onclick="stampa()">
+    </p>
+    <center>
+        <table>
+            <th colspan="3" style="color: red; text-align: center;">Tabella JavaScript</th>
+            <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Indirizzo</th>
+            </tr>
+            <tr>
+            <td><p id="dest"></p></td>
+            <td><p id="dest1"></p></td>
+            <td><p id="dest2"></p></td>
+            </tr>
+            </table>
+    </center>
+</body>
+</html>

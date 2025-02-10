@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV to HTML Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSV to HTML Table</h1>
+    <input type="file" id="csvFileInput" accept=".csv" />
+    <div id="tableContainer"></div>
+
+    <script>
+        document.getElementById('csvFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const text = e.target.result;
+                    const rows = text.split('\n'); 
+                    const table = document.createElement('table');
+
+                    rows.forEach((row, index) => {
+                        const cols = row.split(','); 
+                        const tr = document.createElement('tr');
+
+                        cols.forEach(col => {
+                            const cell = index === 0 ? document.createElement('th') : document.createElement('td');
+                            cell.textContent = col.trim();
+                            tr.appendChild(cell);
+                        });
+
+                        table.appendChild(tr);
+                    });
+
+                    
+                    const tableContainer = document.getElementById('tableContainer');
+                    tableContainer.innerHTML = ''; 
+                    tableContainer.appendChild(table);
+                };
+
+                reader.readAsText(file);
+            }
+        });
+    </script>
+</body>
+</html>
+LavoroVacanze.html
+Visualizzazione di file.html.
+Tabella migranti
+Paolo Petrozzi
+•
+16 dic 2024
+100 punti
+Consegna: 12 gen, 23:59
+Si realizzi un file html contenente una tabella popolata da un file esterno di tipo csv (in allegato).
+Per leggerlo occorre utilizzare l'oggetto "fileReader" la cui sintassi metto in link separato.
+Infine, per scrivere la tabella, occorre "splittare" i dati tramite la funzione "split" relativa alle stringhe in javascript.
+
+table.csv
+CSV
+
+File e FileReader
+https://it.javascript.info/file
+
+JavaScript String split() Method
+https://www.w3schools.com/jsref/jsref_split.asp
+Commenti sul corso

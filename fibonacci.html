@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Sequanza di fibonacci</title>
-    </head>
-    <body>
-        <div id="uscita di Fibonacci"></div>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serie di Fibonacci</title>
+</head>
+<body>
 
-        <script>
-            const uotputDiv= document.getElementedById('fibonacci-out')
+    <h1>Serie di Fibonacci</h1>
+    <p>Inserisci un numero per generare la serie di Fibonacci fino a quel valore:</p>
+    
+    <input type="number" id="numero" min="1" placeholder="Inserisci un numero">
+    <button onclick="calcolaFibonacci()">Calcola</button>
+    
+    <h2>Risultato:</h2>
+    <p id="output"></p>
 
-            let a=0; 
-            let b=1; 
-            let c; 
+    <script>
+        function calcolaFibonacci() {
+            let n = parseInt(document.getElementById("numero").value);
+            if (isNaN(n) || n < 1) {
+                document.getElementById("output").innerText = "Inserisci un numero valido maggiore di 0.";
+                return;
+            }
 
-            let i=0; 
+            let fibonacci = [0, 1];
+            for (let i = 2; i < n; i++) {
+                fibonacci.push(fibonacci[i - 1] + fibonacci[i - 2]);
+            }
 
-            do{
-                outputDiv.textContent+=a+' '; 
-                c=a+b; 
-                a=b; 
-                i++; 
-            }while(c <=100); 
-        </script>
-    </body>
+            document.getElementById("output").innerText = fibonacci.slice(0, n).join(", ");
+        }
+    </script>
 
+</body>
 </html>

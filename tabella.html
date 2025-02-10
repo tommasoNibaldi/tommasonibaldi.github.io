@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabella Anagrafica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Dati Anagrafici Registrati</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Età</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="tabellaDati"></tbody>
+    </table>
+
+    <button onclick="tornaIndietro()">Indietro</button>
+
+    <script>
+        function caricaDati() {
+            let supervettore = JSON.parse(localStorage.getItem("anagrafica")) || [];
+            let tbody = document.getElementById("tabellaDati");
+            tbody.innerHTML = "";
+
+            supervettore.forEach(persona => {
+                let riga = document.createElement("tr");
+                persona.forEach(dato => {
+                    let cella = document.createElement("td");
+                    cella.innerText = dato;
+                    riga.appendChild(cella);
+                });
+                tbody.appendChild(riga);
+            });
+        }
+
+        function tornaIndietro() {
+            location.href = "index.html";
+        }
+
+        window.onload = caricaDati;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sequanza di fibonacci</title>
+    </head>
+    <body>
+        <div id="uscita di Fibonacci"></div>
+
+        <script>
+            const uotputDiv= document.getElementedById('fibonacci-out')
+
+            let a=0; 
+            let b=1; 
+            let c; 
+
+            let i=0; 
+
+            do{
+                outputDiv.textContent+=a+' '; 
+                c=a+b; 
+                a=b; 
+                i++; 
+            }while(c <=100); 
+        </script>
+    </body>
+
+</html>

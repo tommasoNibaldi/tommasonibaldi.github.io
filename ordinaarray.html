@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordinamento Array</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Ordinamento di un Array</h1>
+    <p>Inserisci i numeri separati da uno spazio:</p>
+
+    <input type="text" id="numeri" placeholder="Es. 5 2 8 1 9">
+    <button onclick="ordinaArray()">Ordina Array</button>
+
+    <h2>Ordinato Crescente:</h2>
+    <div id="crescente"></div>
+
+    <h2>Ordinato Decrescente:</h2>
+    <div id="decrescente"></div>
+
+    <script>
+        function ordinaArray() {
+            let input = document.getElementById("numeri").value.trim();
+            if (input === "") {
+                document.getElementById("crescente").innerText = "Inserisci almeno un numero.";
+                document.getElementById("decrescente").innerText = "";
+                return;
+            }
+
+            let numberArray = input.split(" ").map(Number).filter(n => !isNaN(n));
+
+            if (numberArray.length === 0) {
+                document.getElementById("crescente").innerText = "Inserisci solo numeri validi.";
+                document.getElementById("decrescente").innerText = "";
+                return;
+            }
+
+            let crescente = [...numberArray].sort((a, b) => a - b);
+            let decrescente = [...numberArray].sort((a, b) => b - a);
+
+            document.getElementById("crescente").innerText = crescente.join(", ");
+            document.getElementById("decrescente").innerText = decrescente.join(", ");
+        }
+    </script>
+
+</body>
+</html>

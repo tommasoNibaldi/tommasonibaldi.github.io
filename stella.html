@@ -1,15 +1,23 @@
 <!DOCTYPE html>
+<html lang="it">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stella a Cinque Punte</title>
     <style>
         body {
+            display: flex;
+            justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #a2c2e8, #f0e1e1); 
+            font-family: 'Arial', sans-serif;
         }
         canvas {
-            border: 1px solid #000;
+            border: 2px solid #444;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.7);
         }
     </style>
 </head>
@@ -33,7 +41,12 @@
             context.closePath();
             context.fillStyle = "gold";
             context.fill();
-            context.strokeStyle = "black";
+            context.shadowColor = "rgba(0, 0, 0, 0.6)";
+            context.shadowBlur = 10;
+            context.shadowOffsetX = 5;
+            context.shadowOffsetY = 5;
+            context.strokeStyle = "#6a6a6a";
+            context.lineWidth = 3;
             context.stroke();
         }
 
@@ -44,3 +57,4 @@
     </script>
 </body>
 </html>
+

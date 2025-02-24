@@ -3,7 +3,66 @@
 <head>
     <title>CSV to HTML Table</title>
     <link rel="stylesheet" href="style.css">
-
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: flex-start;
+        }
+        h1 {
+            text-align: center;
+            color: #4a90e2;
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="file"]:hover {
+            background-color: #357ab7;
+        }
+        #tableContainer {
+            width: 100%;
+            padding: 20px;
+            overflow-x: auto;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4a90e2;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <h1>CSV to HTML Table</h1>
@@ -35,7 +94,6 @@
                         table.appendChild(tr);
                     });
 
-                    
                     const tableContainer = document.getElementById('tableContainer');
                     tableContainer.innerHTML = ''; 
                     tableContainer.appendChild(table);
@@ -47,3 +105,4 @@
     </script>
 </body>
 </html>
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Risultato anagrafica collection dati</title>
+</head>
+
+</head>
+
+<body>
+    <h1>Tabella Dati</h1>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="7" style="text-align: center">Dati Utenti</th>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Età</th>
+                <th>Compleanno</th>
+                <th>Indirizzo</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody id="vettoreDati"></tbody>
+    </table>
+
+    <script>
+        const dati = JSON.parse(localStorage.getItem('vettoreDati')) || [];
+        const tabella = document.getElementById('vettoreDati');
+        tabella.innerHTML = "";
+
+        let i = 0;
+        while (i < dati.length) {
+            const dato = dati[i];
+            const riga = document.createElement('tr');
+
+            const nome = document.createElement('td');
+            nome.textContent = dato.Nome || "N/A";
+
+            const cognome = document.createElement('td');
+            cognome.textContent = dato.Cognome || "N/A";
+
+            const eta = document.createElement('td');
+            eta.textContent = dato.Età || "N/A";
+
+            const compleanno = document.createElement('td');
+            compleanno.textContent = dato.Compleanno || "N/A";
+
+            const indirizzo = document.createElement('td');
+            indirizzo.textContent = dato.Indirizzo || "N/A";
+
+            const email = document.createElement('td');
+            email.textContent = dato.Email || "N/A";
+
+            const password = document.createElement('td');
+            password.textContent = dato.Password || "***********";
+
+            riga.appendChild(nome);
+            riga.appendChild(cognome);
+            riga.appendChild(eta);
+            riga.appendChild(compleanno);
+            riga.appendChild(indirizzo);
+            riga.appendChild(email);
+            riga.appendChild(password);
+
+            tabella.appendChild(riga);
+            i++;
+        }
+    </script>
+
+</body>
+
+</html>

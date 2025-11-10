@@ -1,0 +1,12 @@
+[
+  { "nome": "Matteo", "cognome": "De Luca", "anno": 1994 },
+  { "nome": "Chiara", "cognome": "Ricci", "anno": 1986 },
+  { "nome": "Alessia", "cognome": "Guerra", "anno": 2004 },
+  { "nome": "Tommaso", "cognome": "Moretti", "anno": 1978 },
+  { "nome": "Valentina", "cognome": "Colombo", "anno": 1963 },
+  { "nome": "Giorgio", "cognome": "Greco", "anno": 1950 },
+  { "nome": "Martina", "cognome": "Rizzo", "anno": 2011 },
+  { "nome": "Riccardo", "cognome": "Barone", "anno": 2000 },
+  { "nome": "Beatrice", "cognome": "Caruso", "anno": 1982 },
+  { "nome": "Luigi", "cognome": "Esposito", "anno": 1930 }
+]

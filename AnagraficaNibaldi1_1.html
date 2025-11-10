@@ -1,0 +1,95 @@
+<!DOCTYPE html>  
+<html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <title>Anagrafica Utenti</title>
+    <link rel="stylesheet" href="Anagrafica1_1.css">
+    
+  </head>
+<body>
+<h2>Anagrafica Utenti </h2>
+
+<input type="text" id="lettera" placeholder="Lettera iniziale">
+<button onclick="filtra()">Filtra</button>
+<button onclick="maggiorenni()">Maggiorenni</button>
+
+<br><br>
+
+<input type="number" id="annoInput" placeholder="Inserisci anno">
+<button onclick="mostraGenerazione()">Generazione</button>
+<p id="gen"></p>
+
+<table>
+<thead>
+<tr><th>Nome</th><th>Cognome</th><th>Anno</th><th>Generazione</th></tr>
+</thead>
+<tbody id="demo"></tbody> /
+</table>
+
+<script>
+var elencoUtenti = []; // array dove salvo tutti gli utenti presi dal file json
+
+var richiestaDati = new XMLHttpRequest(); 
+richiestaDati.open("GET", "anagrafica.json");
+richiestaDati.onload = function() {
+  elencoUtenti = JSON.parse(richiestaDati.responseText);
+  visualizza(elencoUtenti); // quando i dati arrivano, li mostro nella tabella
+};
+richiestaDati.send();
+
+// funzione che mostra gli utenti nella tabella
+function visualizza(listaPersone) { // serve per riempire la tabella con i dati
+  var righeTabella = "";
+  for (var indice = 0; indice < listaPersone.length; indice++) {
+    righeTabella += "<tr><td>" + listaPersone[indice].nome + "</td><td>" + listaPersone[indice].cognome +
+             "</td><td>" + listaPersone[indice].anno + "</td><td>" +
+             calcolaGenerazione(listaPersone[indice].anno) + "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = righeTabella;
+}
+
+// funzione che calcola la generazione in base all'anno di nascita
+function calcolaGenerazione(annoNascita) { // controllo in che fascia di anni è nato e ritorno la generazione
+  if (annoNascita >= 2013) return "Alpha";
+  else if (annoNascita >= 1997) return "Z";
+  else if (annoNascita >= 1981) return "Millennials";
+  else if (annoNascita >= 1965) return "X";
+  else if (annoNascita >= 1946) return "Boomers";
+  else if (annoNascita >= 1923) return "Silent Generation";
+  else return "Altro";
+}
+
+// funzione che filtra gli utenti in base alla lettera del cognome
+function filtra() { // prendo la lettera scritta e mostro solo chi ha il cognome che inizia con quella
+  var letteraIniziale = document.getElementById("lettera").value;
+  var utentiFiltrati = [];
+  for (var i = 0; i < elencoUtenti.length; i++) {
+    var inizialeCognome = elencoUtenti[i].cognome[0];
+    if (inizialeCognome == letteraIniziale) {
+      utentiFiltrati.push(elencoUtenti[i]);
+    }
+  }
+  visualizza(utentiFiltrati);
+}
+
+// funzione che mostra solo gli utenti maggiorenni
+function maggiorenni() { // calcolo l'età di ogni utente e tengo solo quelli con almeno 18 anni
+  var utentiMaggiorenni = [];
+  const dataCorrente = new Date();
+  for (var i = 0; i < elencoUtenti.length; i++) {
+    if (dataCorrente.getFullYear() - elencoUtenti[i].anno >= 18) {
+      utentiMaggiorenni.push(elencoUtenti[i]);
+    }
+  }
+  visualizza(utentiMaggiorenni);
+}
+
+// funzione che mostra la generazione in base all’anno inserito
+function mostraGenerazione() { // leggo l’anno scritto dall’utente e mostro a quale generazione appartiene
+  var annoInserito = document.getElementById("annoInput").value;
+  if (annoInserito == "") return;
+  document.getElementById("gen").innerText = "Appartiene a: " + calcolaGenerazione(annoInserito);
+}
+</script>
+</body>
+</html>

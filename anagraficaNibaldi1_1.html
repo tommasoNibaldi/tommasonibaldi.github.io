@@ -37,17 +37,6 @@ richiestaDati.onload = function() {
 };
 richiestaDati.send();
 
-// funzione che mostra gli utenti nella tabella
-function visualizza(listaPersone) { // serve per riempire la tabella con i dati
-  var righeTabella = "";
-  for (var indice = 0; indice < listaPersone.length; indice++) {
-    righeTabella += "<tr><td>" + listaPersone[indice].nome + "</td><td>" + listaPersone[indice].cognome +
-             "</td><td>" + listaPersone[indice].anno + "</td><td>" +
-             calcolaGenerazione(listaPersone[indice].anno) + "</td></tr>";
-  }
-  document.getElementById("demo").innerHTML = righeTabella;
-}
-
 // funzione che calcola la generazione in base all'anno di nascita
 function calcolaGenerazione(annoNascita) { // controllo in che fascia di anni è nato e ritorno la generazione
   if (annoNascita >= 2013) return "Alpha";
@@ -57,6 +46,17 @@ function calcolaGenerazione(annoNascita) { // controllo in che fascia di anni è
   else if (annoNascita >= 1946) return "Boomers";
   else if (annoNascita >= 1923) return "Silent Generation";
   else return "Altro";
+}
+
+// funzione che mostra gli utenti nella tabella
+function visualizza(listaPersone) { // serve per riempire la tabella con i dati
+  var righeTabella = "";
+  for (var indice = 0; indice < listaPersone.length; indice++) {
+    righeTabella += "<tr><td>" + listaPersone[indice].nome + "</td><td>" + listaPersone[indice].cognome +
+             "</td><td>" + listaPersone[indice].anno + "</td><td>" +
+             calcolaGenerazione(listaPersone[indice].anno) + "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = righeTabella;
 }
 
 // funzione che filtra gli utenti in base alla lettera del cognome
@@ -72,6 +72,13 @@ function filtra() { // prendo la lettera scritta e mostro solo chi ha il cognome
   visualizza(utentiFiltrati);
 }
 
+// funzione che mostra la generazione in base all’anno inserito
+function mostraGenerazione() { // leggo l’anno scritto dall’utente e mostro a quale generazione appartiene
+  var annoInserito = document.getElementById("annoInput").value;
+  if (annoInserito == "") return;
+  document.getElementById("gen").innerText = "Appartiene a: " + calcolaGenerazione(annoInserito);
+}
+
 // funzione che mostra solo gli utenti maggiorenni
 function maggiorenni() { // calcolo l'età di ogni utente e tengo solo quelli con almeno 18 anni
   var utentiMaggiorenni = [];
@@ -83,13 +90,7 @@ function maggiorenni() { // calcolo l'età di ogni utente e tengo solo quelli co
   }
   visualizza(utentiMaggiorenni);
 }
-
-// funzione che mostra la generazione in base all’anno inserito
-function mostraGenerazione() { // leggo l’anno scritto dall’utente e mostro a quale generazione appartiene
-  var annoInserito = document.getElementById("annoInput").value;
-  if (annoInserito == "") return;
-  document.getElementById("gen").innerText = "Appartiene a: " + calcolaGenerazione(annoInserito);
-}
 </script>
 </body>
 </html>
+

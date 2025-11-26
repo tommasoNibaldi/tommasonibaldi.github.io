@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<registro>
+  <scheda>
+    <nome>
+      Filippo
+    </nome>
+    <cognome>
+      Bianchi
+    </cognome>
+    <anno>
+      2015
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Andrea
+    </nome>
+    <cognome>
+      Verdi
+    </cognome>
+    <anno>
+      2006
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Davide
+    </nome>
+    <cognome>
+      Sartori
+    </cognome>
+    <anno>
+      1980
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Matteo
+    </nome>
+    <cognome>
+      Di Luca
+    </cognome>
+    <anno>
+      2008
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Alessio
+    </nome>
+    <cognome>
+      Baroni
+    </cognome>
+    <anno>
+      1950
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Giulia
+    </nome>
+    <cognome>
+      Rinaldi
+    </cognome>
+    <anno>
+      1985
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Valeria
+    </nome>
+    <cognome>
+      Moretti
+    </cognome>
+    <anno>
+      1992
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Carlo
+    </nome>
+    <cognome>
+      Gentile
+    </cognome>
+    <anno>
+      1938
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Elisa
+    </nome>
+    <cognome>
+      Fontana
+    </cognome>
+    <anno>
+      2011
+    </anno>
+  </scheda>
+
+  <scheda>
+    <nome>
+      Steven
+    </nome>
+    <cognome>
+      Clark
+    </cognome>
+    <anno>
+      2000
+    </anno>
+  </scheda>
+</registro>

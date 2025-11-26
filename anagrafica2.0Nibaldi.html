@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <title>Anagrafica Utenti</title>
+    <style>
+      table {border-collapse: collapse; width: 100%;}
+      th, td {border: 1px solid black; padding: 5px;}
+
+      th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+      }
+
+      tr:hover {
+        background-color: #e3e3ff;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      button {
+        padding: 6px 12px;
+        border: none;
+        background-color: #4a63ff;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background-color: #364dd9;
+      }
+
+      input {
+        padding: 6px;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+<body>
+<h2>Anagrafica Utenti </h2>
+
+<input type="text" id="lettera" placeholder="Lettera iniziale">
+<button onclick="filtraCognome()">Filtra</button>
+<button onclick="mostraAdulti()">Maggiorenni</button>
+
+<br><br>
+
+<input type="number" id="annoInput" placeholder="Inserisci anno">
+<button onclick="calcolaGenerazione()">Generazione</button>
+<p id="gen"></p>
+
+<table>
+<thead>
+<tr><th>Nome</th><th>Cognome</th><th>Anno</th><th>Generazione</th></tr>
+</thead>
+<tbody id="demo"></tbody>
+</table>
+
+<script>
+var archivioPersone = [];
+
+function generaEtichetta(annoGen) {
+  if (annoGen >= 2013) return "Alpha";
+  else if (annoGen >= 1997) return "Z";
+  else if (annoGen >= 1981) return "Millennials";
+  else if (annoGen >= 1965) return "X";
+  else if (annoGen >= 1946) return "Boomers";
+  else if (annoGen >= 1923) return "Silent Generation";
+  else return "Altro";
+}
+
+function calcolaGenerazione() {
+  var inputAnno = document.getElementById("annoInput").value;
+  if (inputAnno == "") return;
+  document.getElementById("gen").innerText = "Appartiene a: " + generaEtichetta(inputAnno);
+}
+
+function mostraAdulti() {
+  var adulti = [];
+  const oggi = new Date();
+  for (var s = 0; s < archivioPersone.length; s++) {
+    if (oggi.getFullYear() - archivioPersone[s].annoNascita >= 18) {
+      adulti.push(archivioPersone[s]);
+    }
+  }
+  renderTabella(adulti);
+}
+
+function filtraCognome() {
+  var iniz = document.getElementById("lettera").value;
+  var selezione = [];
+  for (var t = 0; t < archivioPersone.length; t++) {
+    var prima = archivioPersone[t].cognomePers[0];
+    if (prima == iniz) {
+      selezione.push(archivioPersone[t]);
+    }
+  }
+  renderTabella(selezione);
+}
+
+function renderTabella(listaPersone) {
+  var struttura = "";
+  for (var j = 0; j < listaPersone.length; j++) {
+    struttura += "<tr><td>" + listaPersone[j].nomePers + "</td><td>" + listaPersone[j].cognomePers +
+                 "</td><td>" + listaPersone[j].annoNascita + "</td><td>" +
+                 generaEtichetta(listaPersone[j].annoNascita) + "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = struttura;
+}
+
+var richiestaDati = new XMLHttpRequest();
+richiestaDati.open("GET", "anagrafica.xml");
+richiestaDati.onload = function() {
+  const xmlRif = richiestaDati.responseXML;
+  const nodiPersone = xmlRif.getElementsByTagName("utente");
+  archivioPersone = [];
+
+  for (let k = 0; k < nodiPersone.length; k++) {
+    var nomePers = nodiPersone[k].getElementsByTagName("nome")[0].textContent;
+    var cognomePers = nodiPersone[k].getElementsByTagName("cognome")[0].textContent;
+    var annoNascita = parseInt(nodiPersone[k].getElementsByTagName("anno")[0].textContent);
+    archivioPersone.push({ nomePers, cognomePers, annoNascita });
+  }
+
+  renderTabella(archivioPersone);
+};
+richiestaDati.send();
+</script>
+</body>
+</html>

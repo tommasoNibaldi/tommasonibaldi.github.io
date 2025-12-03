@@ -1,13 +1,13 @@
 <!DOCTYPE html>  
 <html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <title>Anagrafica Utenti</title>
-    <link rel="stylesheet" href="Anagrafica1_1.css">
-    
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Anagrafica Utenti</title>
+  <link rel="stylesheet" href="Anagrafica1_1.css">
+</head>
+
 <body>
-<h2>Anagrafica Utenti </h2>
+<h2>Anagrafica Utenti</h2>
 
 <input type="text" id="lettera" placeholder="Lettera iniziale">
 <button onclick="filtra()">Filtra</button>
@@ -23,22 +23,21 @@
 <thead>
 <tr><th>Nome</th><th>Cognome</th><th>Anno</th><th>Generazione</th></tr>
 </thead>
-<tbody id="demo"></tbody> /
+<tbody id="demo"></tbody>
 </table>
 
 <script>
-var elencoUtenti = []; // array dove salvo tutti gli utenti presi dal file json
+var elencoUtenti = [];
 
 var richiestaDati = new XMLHttpRequest(); 
 richiestaDati.open("GET", "anagrafica.json");
 richiestaDati.onload = function() {
   elencoUtenti = JSON.parse(richiestaDati.responseText);
-  visualizza(elencoUtenti); // quando i dati arrivano, li mostro nella tabella
+  visualizza(elencoUtenti);
 };
 richiestaDati.send();
 
-// funzione che calcola la generazione in base all'anno di nascita
-function calcolaGenerazione(annoNascita) { // controllo in che fascia di anni è nato e ritorno la generazione
+function calcolaGenerazione(annoNascita) {
   if (annoNascita >= 2013) return "Alpha";
   else if (annoNascita >= 1997) return "Z";
   else if (annoNascita >= 1981) return "Millennials";
@@ -48,19 +47,18 @@ function calcolaGenerazione(annoNascita) { // controllo in che fascia di anni è
   else return "Altro";
 }
 
-// funzione che mostra gli utenti nella tabella
-function visualizza(listaPersone) { // serve per riempire la tabella con i dati
+function visualizza(listaPersone) {
   var righeTabella = "";
   for (var indice = 0; indice < listaPersone.length; indice++) {
-    righeTabella += "<tr><td>" + listaPersone[indice].nome + "</td><td>" + listaPersone[indice].cognome +
-             "</td><td>" + listaPersone[indice].anno + "</td><td>" +
-             calcolaGenerazione(listaPersone[indice].anno) + "</td></tr>";
+    righeTabella += "<tr><td>" + listaPersone[indice].nome + "</td><td>" +
+                    listaPersone[indice].cognome + "</td><td>" +
+                    listaPersone[indice].anno + "</td><td>" +
+                    calcolaGenerazione(listaPersone[indice].anno) + "</td></tr>";
   }
   document.getElementById("demo").innerHTML = righeTabella;
 }
 
-// funzione che filtra gli utenti in base alla lettera del cognome
-function filtra() { // prendo la lettera scritta e mostro solo chi ha il cognome che inizia con quella
+function filtra() {
   var letteraIniziale = document.getElementById("lettera").value;
   var utentiFiltrati = [];
   for (var i = 0; i < elencoUtenti.length; i++) {
@@ -72,15 +70,13 @@ function filtra() { // prendo la lettera scritta e mostro solo chi ha il cognome
   visualizza(utentiFiltrati);
 }
 
-// funzione che mostra la generazione in base all’anno inserito
-function mostraGenerazione() { // leggo l’anno scritto dall’utente e mostro a quale generazione appartiene
+function mostraGenerazione() {
   var annoInserito = document.getElementById("annoInput").value;
   if (annoInserito == "") return;
   document.getElementById("gen").innerText = "Appartiene a: " + calcolaGenerazione(annoInserito);
 }
 
-// funzione che mostra solo gli utenti maggiorenni
-function maggiorenni() { // calcolo l'età di ogni utente e tengo solo quelli con almeno 18 anni
+function maggiorenni() {
   var utentiMaggiorenni = [];
   const dataCorrente = new Date();
   for (var i = 0; i < elencoUtenti.length; i++) {
@@ -91,6 +87,6 @@ function maggiorenni() { // calcolo l'età di ogni utente e tengo solo quelli co
   visualizza(utentiMaggiorenni);
 }
 </script>
+
 </body>
 </html>
-

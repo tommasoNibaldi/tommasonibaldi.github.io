@@ -1,112 +1,19 @@
 <!DOCTYPE html>
+<html lang="it">
 <head>
-    <title>Indice</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background-color: #f4e1a1; /* Giallo chiaro come colore di sfondo */
-        }
-
-        h1 {
-            background: linear-gradient(to right, #8d6e63, #3e2723); /* Marrone chiaro e scuro */
-            color: white;
-            padding: 25px;
-            margin: 0;
-            font-size: 32px;
-            border-bottom: 5px solid #3e2723;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            height: calc(100vh - 120px); /* altezza meno l'altezza dell'intestazione */
-            padding: 10px;
-        }
-
-        .block {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            color: white;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
-            border-radius: 15px;
-            height: 100%;
-        }
-
-        .block:nth-child(1) { background-color: #f8d77a; } 
-        .block:nth-child(2) { background-color: #f7d28b; }  
-        .block:nth-child(3) { background-color: #f2bc77; }
-        .block:nth-child(4) { background-color: #f1a65a; }
-        .block:nth-child(5) { background-color: #e98f42; }
-        .block:nth-child(6) { background-color: #e17928; }
-        .block:nth-child(7) { background-color: #d86f1d; }
-        .block:nth-child(8) { background-color: #d26413; }
-        .block:nth-child(9) { background-color: #c75a0a; }
-        .block:nth-child(10) { background-color: #b94f02; }  
-        .block:nth-child(11) { background-color: #a74300; }
-        .block:nth-child(12) { background-color: #9c3d00; }
-        .block:nth-child(13) { background-color: #8e3700; }
-        .block:nth-child(14) { background-color: #7f3000; }
-        .block:nth-child(15) { background-color: #6e2a00; }
-        .block:nth-child(16) { background-color: #5c2400; }
-
-        .block:hover {
-            opacity: 0.9;
-        }
-
-        .block a {
-            color: white;
-            text-decoration: none;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 26px;
-                padding: 20px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Occhiali da Sole Shop</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<h1>Occhiali da Sole</h1>
+<div id="categorie"></div>
+<h2>Prodotti</h2>
+<div id="prodotti"></div>
+<button onclick="generaPDF()">Acquista</button>
 
-    <h1>Indice dei file - Nibaldi</h1>
 
-    <div class="container">
-        <div class="block"><a href="fibonacci.html" target="_blank">Fibonacci</a></div>
-        <div class="block"><a href="for.html" target="_blank">For</a></div>
-        <div class="block"><a href="stella.html" target="_blank">Stella</a></div>
-        <div class="block"><a href="contacifre.html" target="_blank">Contacifre</a></div>
-        <div class="block"><a href="canvas.html" target="_blank">Canvas</a></div>
-        <div class="block"><a href="input.html" target="_blank">Input</a></div>
-        <div class="block"><a href="paginahtml.html" target="_blank">Tabella Cannizzaro</a></div>
-        <div class="block"><a href="anagrafica.html" target="_blank">Anagrafica</a></div>
-        <div class="block"><a href="anagrafica2.0.html" target="_blank">Anagrafica 2.0</a></div>
-        <div class="block"><a href="elenconomi.html" target="_blank">Elenco Nomi</a></div>
-        <div class="block"><a href="ordinaarray.html" target="_blank">Ordina Array</a></div>
-        <div class="block"><a href="tabellamigranti.html" target="_blank">Tabella Migranti</a></div>
-        <div class="block"><a href="" target="_blank"></a></div>
-        <div class="block"><a href="anagraficacollection.html" target="_blank">Anagrafica Collection</a></div>
-        <div class="block"><a href="anagraficaNibaldi1_1.html" target="_blank">Anagrafica 1.1</a></div>
-        <div class="block"><a href="anagrafica2.0Nibaldi.html" target="_blank">Anagrafica2.0 XML</a></div>
+<script src="libs/jspdf.umd.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
-
-
-
